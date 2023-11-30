@@ -1,0 +1,20 @@
+{
+  parserClass="com.myplugin.plsqlic3.plugin.customlanguage.sqlorigin.parser.SQLParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="SQL"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.myplugin.plsqlic3.plugin.customlanguage.psi"
+  psiImplPackage="com.myplugin.plsqlic3.plugin.customlanguage.psi.impl"
+
+  elementTypeHolderClass="com.myplugin.plsqlic3.plugin.customlanguage.sqlorigin.parser.SQLTypes"
+  elementTypeClass="com.myplugin.plsqlic3.plugin.customlanguage.sqlorigin.language.SQLElementType"
+  tokenTypeClass="com.myplugin.plsqlic3.plugin.customlanguage.sqlorigin.language.SQLTokenType"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY

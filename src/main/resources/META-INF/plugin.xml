@@ -1,0 +1,166 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.myplugin.PLSQLIC3</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>PLSQLIC3</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="liu-jiangshan@foxmail.com" url="https://github.com/hua-hua666">Jiangshan Liu</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    A plugin to help PL/pgSQL writers understand PL/pgSQL's inconsistencies with SQL.
+  ]]></description>
+
+    <!--    <idea-version since-build="191"/>-->
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!--        <fileType-->
+        <!--                name="SQL"-->
+        <!--                implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sqlorigin.language.SQLFileType"-->
+        <!--                fieldName="INSTANCE"-->
+        <!--                language="SQL"-->
+        <!--                extensions="sql"/>-->
+        <!--        <lang.parserDefinition-->
+        <!--                language="SQL"-->
+        <!--                implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sqlorigin.parser.SQLParserDefinition"/>-->
+
+<!--        <fileType-->
+<!--                name="StringTemplate v4 template group file"-->
+<!--                implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleFileType"-->
+<!--                fieldName="INSTANCE"-->
+<!--                language="Sample"-->
+<!--                extensions="sample"/>-->
+<!--        <fileTypeFactory implementation="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleFileTypeFactory"/>-->
+<!--        <lang.syntaxHighlighterFactory language="Sample"-->
+<!--                                       implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleSyntaxHighlighterFactory"/>-->
+<!--        <lang.parserDefinition language="Sample"-->
+<!--                               implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleParserDefinition"/>-->
+<!--        <lang.ast.factory language="Sample"-->
+<!--                          implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleASTFactory"/>-->
+<!--        <lang.psiStructureViewFactory language="Sample"-->
+<!--                                      implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.structview.SampleStructureViewFactory"/>-->
+<!--        <colorSettingsPage-->
+<!--                implementation="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleColorSettingsPage"/>-->
+<!--        <externalAnnotator language="Sample"-->
+<!--                           implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleExternalAnnotator"/>-->
+<!--        <lang.findUsagesProvider language="Sample"-->
+<!--                                 implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sample.SampleFindUsagesProvider"/>-->
+
+        <toolWindow factoryClass="com.myplugin.plsqlic3.plugin.ui.PLSQLHelperWindowFactory"
+                    id="PLSQLIC3"
+                    anchor="right"
+                    icon="/icons/helper.png"/>
+
+        <fileType
+                name="SQL"
+                implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLFileType"
+                fieldName="INSTANCE"
+                language="SQL"
+                extensions="sql"/>
+        <fileTypeFactory implementation="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLFileTypeFactory"/>
+        <lang.syntaxHighlighterFactory language="SQL"
+                                       implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLSyntaxHighlighterFactory"/>
+        <lang.parserDefinition language="SQL"
+                               implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLParserDefinition"/>
+        <lang.ast.factory language="SQL"
+                          implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLASTFactory"/>
+        <lang.psiStructureViewFactory language="SQL"
+                                      implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.structview.SQLStructureViewFactory"/>
+        <colorSettingsPage implementation="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLColorSettingsPage"/>
+        <!--        <externalAnnotator language="SQL"-->
+        <!--                           implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLExternalAnnotator"/>-->
+        <!--        <lang.findUsagesProvider language="SQL"-->
+        <!--                                 implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.SQLFindUsagesProvider"/>-->
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Overlook"
+                         displayName="Non-integer FOR LOOP boundary"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.LoopBoundNonintInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Overlook"
+                         displayName="Non empty VOID return value"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.NotEmptyVoidRetInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Presumption"
+                         displayName="Taking CHAR type parameters for granted"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.CharArgTypeInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Presumption"
+                         displayName="Different COLLATE in RECURSIVE query terms"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.DiffCollateInRecTermsInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Presumption"
+                         displayName="Parameter COLLATE conflict"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.ParamCollateConflictInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Equivocality"
+                         displayName="Equivocal keyword INTO"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.EquivocalityIntoInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Equivocality"
+                         displayName="Equivocal keyword EXECUTE"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.EquivocalityExecuteInspection"/>
+        <localInspection language="SQL"
+                         groupPath="PL/SQL"
+                         groupName="Equivocality"
+                         displayName="Equivocal keyword RETURNING"
+                         groupBundle="messages.InspectionsBundle"
+                         enabledByDefault="true"
+                         level="INFO"
+                         implementationClass="com.myplugin.plsqlic3.plugin.customlanguage.sql.quickfix.inspection.EquivocalityReturningInspection"/>
+
+    </extensions>
+    <actions>
+        <!--        <action id="HelloAction" class="com.myplugin.plsqlic3.plugin.action.HelloAction" text="ShowHelloWorld"-->
+        <!--                description="Show Hello World">-->
+        <!--            <add-to-group group-id="HelpMenu" anchor="first"/>-->
+        <!--        </action>-->
+        <action id="VerifyConsistencyAction" class="com.myplugin.plsqlic3.plugin.action.VerifyConsistencyAction"
+                text="Verify Consistency" description="Verify Consistency of PL/SQL and SQL">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action id="ParsePLSQLCodeAction" class="com.myplugin.plsqlic3.plugin.action.ParsePLSQLCodeAction"
+                text="Select and Parse PLSQL Code" description="Select and Parse PLSQL Code">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

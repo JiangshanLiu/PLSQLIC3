@@ -1,0 +1,24 @@
+<html>
+<body>
+Inspect if the bounds of an integer variant FOR LOOP are non-integers.
+<p>
+    An integer variable FOR LOOP receives non-plastic numbers as upper and lower bounds on the variable, PL/SQL rounds them first, but this sometimes results in exceeding the bounds.
+</p>
+<p>Example:</p>
+<pre><code>
+FOR var IN 1 .. 2.5 LOOP
+  -- statements
+END LOOP;
+</code></pre>
+<p>
+    The loop will be executed 3 times and the iteration variable <code>var</code> will be 1,2,3 respectively.
+</p>
+<p>
+    See
+    <a href="https://www.postgresql.org/docs/current/plpgsql-control-structures.html#PLPGSQL-INTEGER-FOR">PostgreSQL document</a>
+    for more information.
+</p>
+<!-- tooltip end -->
+
+</body>
+</html>
