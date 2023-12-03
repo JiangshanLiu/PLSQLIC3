@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.myplugin"
-version = "3.0-SNAPSHOT"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
