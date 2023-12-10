@@ -12,6 +12,10 @@
     <h2>Detecting inconsistencies in PL/SQL code through software testing methods</h2>
 </header>
 <main>
+    <p>This is an addition to the paper <a
+            href="https://github.com/JiangshanLiu/PLSQLIC3/blob/master/web/I3DE%20An%20IDE%20for%20Inspecting%20Inconsistencies%20in%20PLSQL%20Code.pdf">I<sup>3</sup>DE:
+        An IDE for Inspecting Inconsistencies in PL/SQL Code</a>.</p>
+
     <section>
         <h2>1 Background Investigation</h2>
         <p>PL/SQL is an extension of the SQL language in a DBMS. We have observed that the understanding of PL/SQL by
@@ -342,7 +346,7 @@ END; $$ LANGUAGE plpgsql;
             the seed set, new test cases will be added back to the seed set.</p>
         <h4>(4) Mutate sampled seed.</h4>
         <p>The diversity of test cases helps to reveal software defects. Mutations are commonly used to generate more
-            test cases and increase the diversity of test cases [33]. Tarimci et al [30] summarized and implemented 44
+            test cases and increase the diversity of test cases. Tarimci et al summarized and implemented 44
             mutation operators in order to measure the quality of PL/SQL test case collections by mutation testing.
             Among them, 17 Generic Mutation Operators (GMO) are obtained from mainstream procedural languages (e.g., C,
             Python, etc.), 21 SQL Mutation Operators (SMO) are designed for SQL, and 6 PL/SQL Mutation Operators (PMO)
@@ -428,7 +432,7 @@ SELECT factorial(10);
             figure.</p>
         <h4>(4) Administrative Normal Form (ANF)</h4>
         <p>Administrative Normal Form (ANF) is a logically equivalent intermediate representation of the program to SSA
-            [34] and can be converted by the conversion strategy of Chakravarty et al [35]. An example of a conversion
+            and can be converted by the conversion strategy of Chakravarty et al. An example of a conversion
             is shown in figure.</p>
         <p>ANF maps the code blocks in SSA to a series of tail recursive functions that call each other. The block’s
             sequence of assignment statements is expressed in terms of cascades of let bindings.Variables have
@@ -474,7 +478,7 @@ SELECT factorial(10);
             needs to be taken to ignore the order of the rows when comparing them, i.e., to consider the multiple rows
             of the return value as a set rather than a list.</p>
         <p>Automatic indicator of potential bugs is one of the important factors in whether fuzzing can be performed
-            automatically [33]. Although this method is able to automatically record details of anomalies found to the
+            automatically. Although this method is able to automatically record details of anomalies found to the
             log when detecting defects, it still requires a lot of manual inspection and analysis to filter them. This
             is a common problem of fuzzing work. To reduce manual analysis, we have designed some pre-categorization to
             help organize as much as possible.</p>
@@ -623,9 +627,206 @@ END;
     </section>
 
     <section>
+        <h2>4 User Study</h2>
+        <h3>4.1 Judgement of PL/SQL Proficiency</h3>
+        <p>We used a questionnaire that combined a combination of subjective scoring and objective questions to judge
+            users' proficiency in PL/SQL. The content of the questionnaire is as follows.</p>
+        <p><strong>subjective evaluation by self-evaluation</strong>, 10 marks in total</p>
+        <p>[Q<sub>1</sub>] Your level of PL/pgSQL proficiency (0 for not at all familiar, 10 for professional):<br>
+            0 1 2 3 4 5 6 7 8 9 10</p>
+        <p><strong>objective evaluation by questions</strong>, 10 marks in total</p>
+        <p>[Q<sub>1</sub>, Single choice, 1 mark] What type of database programming language is PL/SQL?<br>
+            A. static programming language<br>
+            B. dynamic programming language<br>
+            C. procedural programming language<br>
+            D. functional programming language</p>
+        <p>[Q<sub>2</sub>, Single choice, 1 mark] PL/SQL is commonly used:<br>
+            A. network security<br>
+            B. implementation of business logic<br>
+            C. database backup and recovery<br>
+            D. front-end user interface design</p>
+        <p>[Q<sub>3</sub>, Single choice, 1 mark] Which of the following features is not supported by PL/SQL?<br>
+            A. conditional branching<br>
+            B. iterative loop<br>
+            C. lambda expression<br>
+            D. variable declaration and assignment</p>
+        <p>[Q<sub>4</sub>, Single choice, 1 mark] Which of the following features is not supported by PL/SQL?<br>
+            A. cursor<br>
+            B. exception handling<br>
+            C. calling SQL Statements<br>
+            D. object-oriented programming</p>
+        <p>[Q<sub>5</sub>, Single choice, 1 mark] The range of data types supported by PL/SQL and SQL matches which of
+            the following statements?<br>
+            A. SQL is a subset of PL/SQL<br>
+            B. PL/SQL is a subset of SQL<br>
+            C. The two are intertwined<br>
+            D. They don't intersect</p>
+        <p>[Q<sub>6</sub>, Single choice, 1 mark] Where can I declare a variable in PL/SQL?<br>
+            A. at the beginning of the programme<br>
+            B. anywhere in the programme<br>
+            C. in the DECLARE block<br>
+            D. through the VARIABLE keyword</p>
+        <p>[Q<sub>7</sub>, Multiple choice, 0.5 mark for each option, 2 marks in total] Where can I declare a variable
+            in PL/SQL?<br>
+            A. GOTO statement<br>
+            B. custom data types<br>
+            C. returns a table structure<br>
+            D. compiler-based optimisation</p>
+        <p>[Q<sub>8</sub>, Multiple choice, 0.5 mark for each option, 2 marks in total] The following statement is
+            correct?<br>
+            A. The PL/SQL compiler and execution engine is based on a C implementation.<br>
+            B. PL/SQL, like C/C++ and Java, natively supports excellent single-step debugging, call stack and other
+            debugging features.<br>
+            C. PL/SQL is an extension of SQL, and in the case of PostgreSQL, PL/pgSQL is independent of the DBMS core as
+            an extension module.<br>
+            D. PL/SQL, like SQL, has a unified international standard, and the PL/SQL syntax implemented by each vendor
+            following the standard is the same.</p>
+
+        <h3>4.2 Grouping Method</h3>
+        <p>We categorised the participants into control and experimental groups based on their PL/SQL proficiency in
+            Section 4.1. The grouping ensured 2 points:</p>
+        <ul>
+            <li>Each group contained the widest possible range of participants with different levels of PL/SQL
+                familiarity
+            </li>
+            <li>The gap between the two groups was as small as possible</li>
+        </ul>
+        <p>Due to the disparity in PL/SQL familiarity across participants, assigning participants to the two groups in
+            descending order of familiarity would result in the group assigned first having an overall higher level of
+            familiarity than the other group. Therefore, we assigned participants in a serpentine grouping method, i.e.,
+            position 1 was assigned to the experimental group, positions 2,3 were assigned to the control group,
+            positions 4,5 were assigned to the experimental group, and so on.</p>
+        <h3>4.3 User Study Tasks</h3>
+        <p>We designed 3 tasks corresponding to 3 types of PL/SQL inconsistencies.</p>
+        <h4>(1) Presumption</h4>
+        <pre>
+            <code>
+-- Fill in the blank of the procedure.
+-- Consider an information system in which identity privileges are
+-- assigned according to the first character of the account number,
+-- with 1 being the supervisor.
+-- The following procedure determines whether a user is a
+-- non-supervisor by passing in the user's account number
+-- and, if so, issues an alert.
+CREATE FUNCTION giveAlert(account CHAR) RETURNS boolean AS $$
+BEGIN
+  IF _____ != '1' THEN              -- fallacy: account
+    raise notice 'GIve an alert!';  -- correct: account::CHAR
+    RETURN true;
+  ELSE
+    RETURN false;
+  END IF;
+END;
+$$ LANGUAGE plpgsql;
+            </code>
+        </pre>
+        <h4>(2) Overlook</h4>
+        <pre>
+            <code>
+-- Fill in the blank of the procedure.
+-- The following procedure awards prizes to the top i individuals
+-- by passing in the total_num and the percentage of the prize.
+CREATE FUNCTION award(total_num int, percentage float)
+  RETURNS int AS $$
+DECLARE
+  var_last_prize INT;  -- fallacy: total_num * percentage
+BEGIN                  -- correct: FLOOR(total_num * percentage)
+  FOR i IN 1 .. _____ LOOP
+    raise notice 'Prize for the person with ranking %', i;
+    var_last_prize = i;
+  END LOOP;
+  RETURN var_last_prize;
+END;
+$$ LANGUAGE plpgsql;
+            </code>
+        </pre>
+        <h4>(3) Equivocality</h4>
+        <pre>
+            <code>
+-- Indicate the result of running the procedure.
+-- There's a table tb_employee(col_id, col_salary) in current DBMS.
+-- col_id, col_salary are INT type.
+-- Now expect the col_salary column to be written to the new table
+-- salary_backup.
+CREATE OR REPLACE FUNCTION backupSalary() RETURNS void AS $$
+BEGIN
+  SELECT col_salary INTO tsalary_backup FROM tb_employee;
+END;                 -- fallacy: treat tsalary_backup as a table
+$$ LANGUAGE plpgsql; -- correct: treat tsalary_backup as a variable
+            </code>
+        </pre>
+        <h3>4.4 Complete with ChatGPT</h3>
+        <p>We attempted to solve the tasks presented in Section 4.3 using generative grand models. The results show that
+            generative macromodels usually require deeper extremely leading questions on these tasks to get the correct
+            answers. This proves the effectiveness of our tool.</p>
+        <p>Note: We conducted the experiment using ChatGPT on 29 November 2023, and subsequent replications of this
+            experiment may not yield the same answers as the ChatGPT model is updated.</p>
+        <h4>(1) Presumption</h4>
+        <h5>ChatGPT3.5</h5>
+        <p><strong>Programmer:</strong> Please fill in the PL/pgSQL code blanks below: [Task 1 Code]<br>
+            <strong>ChatGPT4:</strong> account<br>
+            <strong>Programmer:</strong> An account starting with 1, account='10000', then account ! = '1' is true or
+            false?<br>
+            <strong>ChatGPT4:</strong> PostgreSQL will truncate this value to fit into the single character field. The
+            account will actually only store '1'. Therefore, in this case, account != '1' would be false because account
+            will only contain '1' after the assignment account = '10000' in a CHAR(1) or simply CHAR field.<br>
+            <span style="color: red;">Author's Note: This is incorrect knowledge and does not correspond to what PL/pgSQL actually is!</span><br>
+            <strong>Programmer:</strong> So what should be filled in the blanks in the PL/pgSQL code?<br>
+            <strong>ChatGPT4:</strong> LEFT(account, 1) or account::CHAR<br>
+        </p>
+        <h5>ChatGPT4</h5>
+        <p><strong>Programmer:</strong> Please fill in the PL/pgSQL code blanks below: [Task 1 Code]<br>
+            <strong>ChatGPT4:</strong> account<br>
+            <strong>Programmer:</strong> An account starting with 1, account='10000', then account ! = '1' is true or
+            false?<br>
+            <strong>ChatGPT4:</strong> PostgreSQL will truncate this value to fit into the single character field. The
+            account will actually only store '1'. Therefore, in this case, account != '1' would be false because account
+            will only contain '1' after the assignment account = '10000' in a CHAR(1) or simply CHAR field.<br>
+            <span style="color: red;">Author's Note: This is incorrect knowledge and does not correspond to what PL/pgSQL actually is!</span><br>
+            <strong>Programmer:</strong> So what should be filled in the blanks in the PL/pgSQL code?<br>
+            <strong>ChatGPT4:</strong> LEFT(account, 1) or account::CHAR<br>
+        </p>
+        <h4>(2) Overlook</h4>
+        <h5>ChatGPT3.5</h5>
+        <p><strong>Programmer:</strong> Please fill in the PL/pgSQL code blanks below: [Task 2 Code]<br>
+            <strong>ChatGPT3.5:</strong> total_num * percentage<br>
+            <strong>Programmer:</strong> Does your answer make the PL/pgSQL code inconsistent in any way?<br>
+            <strong>ChatGPT3.5:</strong> ROUND(total_num * percentage)<br>
+            <strong>Programmer:</strong> Is it appropriate to use ROUND?<br>
+            <strong>ChatGPT3.5:</strong> CEIL, FLOOR or ROUND<br>
+        </p>
+        <h5>ChatGPT4</h5>
+        <p><strong>Programmer:</strong> Please fill in the PL/pgSQL code blanks below: [Task 2 Code]<br>
+            <strong>ChatGPT4:</strong> ROUND(total_num * percentage)<br>
+            <strong>Programmer:</strong> Is it appropriate to use ROUND?<br>
+            <strong>ChatGPT4:</strong> CEIL, FLOOR or ROUND<br>
+        </p>
+        <h4>(3) Equivocality</h4>
+        <h5>ChatGPT3.5</h5>
+        <p><strong>Programmer:</strong> What would be the result of executing the following PL/pgSQL code? [Task 3 Code]<br>
+            <strong>ChatGPT3.5:</strong> It attempts to use a SELECT INTO statement without specifying a target variable<br>
+        </p>
+        <h5>ChatGPT4</h5>
+        <p><strong>Programmer:</strong> What would be the result of executing the following PL/pgSQL code? [Task 3 Code]<br>
+            <strong>ChatGPT4:</strong> Incorrect Use of SELECT INTO: The SELECT INTO statement in PL/pgSQL is used to
+            assign values to variables, not to insert data into tables.<br>
+        </p>
+    </section>
+
+    <section>
         <h2>Contact</h2>
+        <p><a href="https://tjusail.github.io/">TJU Software Analysis and Intelligence Lab</a>.</p>
         <p>You can reach us at <a href="mailto:jiangshan.liu@tju.edu.cn">jiangshan.liu@tju.edu.cn</a>.</p>
     </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
 </main>
 <footer>
     <p>&copy; 2023 College of Intelligence and Computing, Tianjin University</p>

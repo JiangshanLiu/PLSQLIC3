@@ -8,7 +8,12 @@ widely usable plugin for the IntelliJ Platform. We conducted a comparative user 
 findings indicate that I<sup>3</sup>DE is consistently effective and efficient in helping programmers identify and avoid
 inconsistencies across different programming difficulties.
 
+Snapshots of I<sup>3</sup>DE static mode (left) and dynamic mode (right).
+
+![snapshots][3]
+
 For more details please see our [paper][1] and [technical report][2].
 
-[1]: https://jiangshanliu.github.io/PLSQLIC3/web/
+[1]: https://github.com/JiangshanLiu/PLSQLIC3/blob/master/web/I3DE%20An%20IDE%20for%20Inspecting%20Inconsistencies%20in%20PLSQL%20Code.pdf
 [2]: https://jiangshanliu.github.io/PLSQLIC3/web/
+[3]: https://github.com/JiangshanLiu/PLSQLIC3/blob/master/web/snapshots.png
